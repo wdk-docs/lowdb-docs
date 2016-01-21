@@ -1,0 +1,50 @@
+body {
+  font-family: sans-serif;
+  width: 960px;
+  margin: 0 auto;
+  color: #333;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+#intro {
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
+  padding: 20px 0 20px 0;
+}
+
+a {
+  color: inherit;
+}
+
+h2 {
+  font-weight: normal;
+}
+
+textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  border: 1px solid #999;
+}
+
+.container {
+  position: relative;
+}
+
+.left, .right {
+  position: absolute;
+  width: 49%;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}

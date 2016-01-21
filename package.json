@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "lowdb-site",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "browserify src/index.js -o bundle.js",
+    "watch": "watchify src/index.js -o bundle.js"
+  },
+  "author": "Typicode <typicode@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lowdb": "^0.12.0",
+    "vue": "^1.0.14"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "watchify": "^3.7.0"
+  }
+}

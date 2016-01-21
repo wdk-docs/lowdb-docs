@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Try lowdb</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" class="container">
+    <h1>Try lowdb</a></h1>
+
+    <p id="intro"><em><a href="https://github.com/typicode/lowdb">Lowdb</a> is a small database for Node and the browser powered by <a href="https://lodash.com">lodash</a>.</em></p>
+
+    <div class="left">
+      <p>Code<p>
+      <textarea rows="30" v-model="code">{{ code }}</textarea>
+      <button v-on:click.prevent="eval">Run</button>
+      <button v-on:click.prevent="reset">Reset</button>
+      <p v-if="error">Error: {{ error }}</p>
+    </div>
+
+    <div class="right">
+      <p>Database</p>
+      <pre><code class="hljs css">{{{ object | stringify | highlight }}}</code></pre>
+
+      <p>Output</p>
+      <pre><code class="hljs css">{{{ output | stringify | highlight }}}</code></pre>
+    </div>
+  </div>
+
+  <script src="bundle.js"></script>
+</body>
+</html>
