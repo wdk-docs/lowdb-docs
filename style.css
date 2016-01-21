@@ -12,7 +12,8 @@ h1 {
 #intro {
   border-top: 1px solid #EEE;
   border-bottom: 1px solid #EEE;
-  padding: 20px 0 20px 0;
+  padding: 5px 0 5px 0;
+  margin: 20px 0 30px 0;
 }
 
 a {
@@ -21,6 +22,14 @@ a {
 
 h2 {
   font-weight: normal;
+  font-size: 12px;
+  color: #666;
+  background: #F8F8F8;
+  border: solid #EEE;
+  border-width: 1px 1px 0 1px;
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
 }
 
 textarea {
@@ -29,22 +38,59 @@ textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0 10px 0;
-  border: 1px solid #999;
 }
 
-.container {
+pre {
+  margin: 0 0 20px 0;
+}
+
+textarea, code {
+  border: 1px solid #EEE;
+}
+
+#error {
+  font-size: 12px;
+  color: #C62828;
+}
+
+footer {
+  width: 960px;
+  padding-top: 20px;
+  border-top: 1px solid #EEE;
+  color: #999;
+}
+
+/* http://mystrd.at/modern-clean-css-sticky-footer/ */
+html {
   position: relative;
+  min-height: 100%;
 }
 
-.left, .right {
+body {
+  margin-bottom: 60px; /* bottom = footer height */
+}
+
+footer {
   position: absolute;
-  width: 49%;
+  bottom: 0;
+  height: 40px;
 }
 
-.left {
-  left: 0;
+/* https://davidwalsh.name/flexbox-column */
+.flexbox-container {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
 }
 
-.right {
-  right: 0;
+.flexbox-container > div {
+	width: 50%;
+}
+
+.flexbox-container > div:first-child {
+  padding-right: 10px;
+}
+
+.flexbox-container > div:last-child {
+  padding-left: 10px;
 }
