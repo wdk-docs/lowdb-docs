@@ -2,52 +2,43 @@
 
 [![](http://img.shields.io/npm/dm/lowdb.svg?style=flat)](https://www.npmjs.org/package/lowdb) [![Build Status](https://travis-ci.org/typicode/lowdb.svg?branch=master)](https://travis-ci.org/typicode/lowdb) [![npm](https://img.shields.io/npm/v/lowdb.svg)](https://www.npmjs.org/package/lowdb)
 
-> Small JSON database for Node, Electron and the browser. Powered by Lodash. :zap:
+> 小 JSON 数据库节点，电子和浏览器。 技术 Lodash。 :zap:
 
 ```js
-db.get('posts')
-  .push({ id: 1, title: 'lowdb is awesome'})
-  .write()
+db.get("posts").push({ id: 1, title: "lowdb is awesome" }).write();
 ```
 
-## Usage
+## 用法
 
 ```sh
 npm install lowdb
 ```
 
 ```js
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
 
-const adapter = new FileSync('db.json')
-const db = low(adapter)
+const adapter = new FileSync("db.json");
+const db = low(adapter);
 
 // Set some defaults (required if your JSON file is empty)
-db.defaults({ posts: [], user: {}, count: 0 })
-  .write()
+db.defaults({ posts: [], user: {}, count: 0 }).write();
 
 // Add a post
-db.get('posts')
-  .push({ id: 1, title: 'lowdb is awesome'})
-  .write()
+db.get("posts").push({ id: 1, title: "lowdb is awesome" }).write();
 
 // Set a user using Lodash shorthand syntax
-db.set('user.name', 'typicode')
-  .write()
-  
+db.set("user.name", "typicode").write();
+
 // Increment count
-db.update('count', n => n + 1)
-  .write()
+db.update("count", (n) => n + 1).write();
 ```
 
 Data is saved to `db.json`
 
 ```json
 {
-  "posts": [
-    { "id": 1, "title": "lowdb is awesome"}
-  ],
+  "posts": [{ "id": 1, "title": "lowdb is awesome" }],
   "user": {
     "name": "typicode"
   },
@@ -59,25 +50,23 @@ You can use any of the powerful [lodash](https://lodash.com/docs) functions, lik
 
 ```js
 // For performance, use .value() instead of .write() if you're only reading from db
-db.get('posts')
-  .find({ id: 1 })
-  .value()
+db.get("posts").find({ id: 1 }).value();
 ```
 
 Lowdb is perfect for CLIs, small servers, Electron apps and npm packages in general.
 
-It supports __Node__, the __browser__ and uses __lodash API__, so it's very simple to learn. Actually, if you know Lodash, you already know how to use lowdb :wink:
+It supports **Node**, the **browser** and uses **lodash API**, so it's very simple to learn. Actually, if you know Lodash, you already know how to use lowdb :wink:
 
-* [Usage examples](https://github.com/typicode/lowdb/tree/master/examples)
-  * [CLI](https://github.com/typicode/lowdb/tree/master/examples#cli)
-  * [Browser](https://github.com/typicode/lowdb/tree/master/examples#browser)
-  * [Server](https://github.com/typicode/lowdb/tree/master/examples#server)
-  * [In-memory](https://github.com/typicode/lowdb/tree/master/examples#in-memory)
-* [JSFiddle live example](https://jsfiddle.net/typicode/4kd7xxbu/)
+- [Usage examples](https://github.com/typicode/lowdb/tree/master/examples)
+  - [CLI](https://github.com/typicode/lowdb/tree/master/examples#cli)
+  - [Browser](https://github.com/typicode/lowdb/tree/master/examples#browser)
+  - [Server](https://github.com/typicode/lowdb/tree/master/examples#server)
+  - [In-memory](https://github.com/typicode/lowdb/tree/master/examples#in-memory)
+- [JSFiddle live example](https://jsfiddle.net/typicode/4kd7xxbu/)
 
-__Important__ lowdb doesn't support Cluster and may have issues with very large JSON files (~200MB).
+**Important** lowdb doesn't support Cluster and may have issues with very large JSON files (~200MB).
 
-## Install
+## 安装
 
 ```sh
 npm install lowdb
@@ -96,97 +85,90 @@ A UMD build is also available on [unpkg](https://unpkg.com/) for testing and qui
 <script src="https://unpkg.com/lowdb@0.17/dist/low.min.js"></script>
 <script src="https://unpkg.com/lowdb@0.17/dist/LocalStorage.min.js"></script>
 <script>
-  var adapter = new LocalStorage('db')
-  var db = low(adapter)
+  var adapter = new LocalStorage("db");
+  var db = low(adapter);
 </script>
 ```
 
 ## API
 
-__low(adapter)__
+**low(adapter)**
 
 Returns a lodash [chain](https://lodash.com/docs/4.17.4#chain) with additional properties and functions described below.
 
-__db.[...].write()__ and __db.[...].value()__
+**db.[...].write()** and **db.[...].value()**
 
 `write()` writes database to state.
 
 On the other hand, `value()` is just [\_.prototype.value()](https://lodash.com/docs/4.17.4#prototype-value) and should be used to execute a chain that doesn't change database state.
 
-
 ```js
-db.set('user.name', 'typicode')
-  .write()
+db.set("user.name", "typicode").write();
 ```
 
 Please note that `db.[...].write()` is syntactic sugar and equivalent to
 
 ```js
-db.set('user.name', 'typicode')
-  .value()
+db.set("user.name", "typicode").value();
 
-db.write()
+db.write();
 ```
 
-__db.___
+**db.\_**
 
 Database lodash instance. Use it to add your own utility functions or third-party mixins like [underscore-contrib](https://github.com/documentcloud/underscore-contrib) or [lodash-id](https://github.com/typicode/lodash-id).
 
 ```js
 db._.mixin({
-  second: function(array) {
-    return array[1]
-  }
-})
+  second: function (array) {
+    return array[1];
+  },
+});
 
-db.get('posts')
-  .second()
-  .value()
+db.get("posts").second().value();
 ```
 
-__db.getState()__
+**db.getState()**
 
 Returns database state.
 
 ```js
-db.getState() // { posts: [ ... ] }
+db.getState(); // { posts: [ ... ] }
 ```
 
-__db.setState(newState)__
+**db.setState(newState)**
 
 Replaces database state.
 
 ```js
-const newState = {}
-db.setState(newState)
+const newState = {};
+db.setState(newState);
 ```
 
-__db.write()__
+**db.write()**
 
 Persists database using `adapter.write` (depending on the adapter, may return a promise).
 
 ```js
 // With lowdb/adapters/FileSync
-db.write()
-console.log('State has been saved')
+db.write();
+console.log("State has been saved");
 
 // With lowdb/adapters/FileAsync
-db.write()
-  .then(() => console.log('State has been saved'))
+db.write().then(() => console.log("State has been saved"));
 ```
 
-__db.read()__
+**db.read()**
 
 Reads source using `storage.read` option (depending on the adapter, may return a promise).
 
 ```js
 // With lowdb/FileSync
-db.read()
-console.log('State has been updated')
+db.read();
+console.log("State has been updated");
 
 // With lowdb/FileAsync
-db.read()
-  .then(() => console.log('State has been updated'))
+db.read().then(() => console.log("State has been updated"));
 ```
 
 ## Adapters API
@@ -195,20 +177,20 @@ Please note this only applies to adapters bundled with Lowdb. Third-party adapte
 
 For convenience, `FileSync`, `FileAsync` and `LocalBrowser` accept the following options:
 
-* __defaultValue__ if file doesn't exist, this value will be used to set the initial state (default: `{}`)
-* __serialize/deserialize__ functions used before writing and after reading (default: `JSON.stringify` and `JSON.parse`)
+- **defaultValue** if file doesn't exist, this value will be used to set the initial state (default: `{}`)
+- **serialize/deserialize** functions used before writing and after reading (default: `JSON.stringify` and `JSON.parse`)
 
 ```js
-const adapter = new FileSync('array.yaml', {
+const adapter = new FileSync("array.yaml", {
   defaultValue: [],
   serialize: (array) => toYamlString(array),
-  deserialize: (string) => fromYamlString(string)
-})
+  deserialize: (string) => fromYamlString(string),
+});
 ```
 
-## Guide
+## 指南
 
-### How to query
+### 如何查询
 
 With lowdb, you get access to the entire [lodash API](http://lodash.com/), so there are many ways to query and manipulate data. Here are a few examples to get you started.
 
@@ -216,8 +198,7 @@ Please note that data is returned by reference, this means that modifications to
 
 Also, the execution of methods is lazy, that is, execution is deferred until `.value()` or `.write()` is called.
 
-
-### Reading from existing JSON file
+### 从现有的 JSON 文件中读取
 
 If you are reading from a file adapter, the path is relative to execution path (CWD) and not to your code.
 
@@ -225,152 +206,121 @@ If you are reading from a file adapter, the path is relative to execution path (
 my_project/
   src/
     my_example.js
-  db.json 
+  db.json
 ```
+
 So then you read it like this:
 
 ```js
 // file src/my_example.js
-const adapter = new FileSync('db.json')
+const adapter = new FileSync("db.json");
 
 // With lowdb/FileAsync
-db.read()
-  .then(() => console.log('Content of my_project/db.json is loaded'))
+db.read().then(() => console.log("Content of my_project/db.json is loaded"));
 ```
 
-
-#### Examples
+#### 例子
 
 Check if posts exists.
 
 ```js
-db.has('posts')
-  .value()
+db.has("posts").value();
 ```
 
 Set posts.
 
 ```js
-db.set('posts', [])
-  .write()
+db.set("posts", []).write();
 ```
-
 
 Sort the top five posts.
 
 ```js
-db.get('posts')
-  .filter({published: true})
-  .sortBy('views')
-  .take(5)
-  .value()
+db.get("posts").filter({ published: true }).sortBy("views").take(5).value();
 ```
 
 Get post titles.
 
 ```js
-db.get('posts')
-  .map('title')
-  .value()
+db.get("posts").map("title").value();
 ```
 
 Get the number of posts.
 
 ```js
-db.get('posts')
-  .size()
-  .value()
+db.get("posts").size().value();
 ```
 
 Get the title of first post using a path.
 
 ```js
-db.get('posts[0].title')
-  .value()
+db.get("posts[0].title").value();
 ```
 
 Update a post.
 
 ```js
-db.get('posts')
-  .find({ title: 'low!' })
-  .assign({ title: 'hi!'})
-  .write()
+db.get("posts").find({ title: "low!" }).assign({ title: "hi!" }).write();
 ```
 
 Remove posts.
 
 ```js
-db.get('posts')
-  .remove({ title: 'low!' })
-  .write()
+db.get("posts").remove({ title: "low!" }).write();
 ```
 
 Remove a property.
 
 ```js
-db.unset('user.name')
-  .write()
+db.unset("user.name").write();
 ```
 
 Make a deep clone of posts.
 
 ```js
-db.get('posts')
-  .cloneDeep()
-  .value()
+db.get("posts").cloneDeep().value();
 ```
 
-### How to use id based resources
+### 如何使用基于 ID 的资源
 
 Being able to get data using an id can be quite useful, particularly in servers. To add id-based resources support to lowdb, you have 2 options.
 
 [shortid](https://github.com/dylang/shortid) is more minimalist and returns a unique id that you can use when creating resources.
 
 ```js
-const shortid = require('shortid')
+const shortid = require("shortid");
 
 const postId = db
-  .get('posts')
-  .push({ id: shortid.generate(), title: 'low!' })
-  .write()
-  .id
+  .get("posts")
+  .push({ id: shortid.generate(), title: "low!" })
+  .write().id;
 
-const post = db
-  .get('posts')
-  .find({ id: postId })
-  .value()
+const post = db.get("posts").find({ id: postId }).value();
 ```
 
 [lodash-id](https://github.com/typicode/lodash-id) provides a set of helpers for creating and manipulating id-based resources.
 
 ```js
-const lodashId = require('lodash-id')
-const FileSync = require('lowdb/adapters/FileSync')
+const lodashId = require("lodash-id");
+const FileSync = require("lowdb/adapters/FileSync");
 
-const adapter = new FileSync('db.json')
-const db = low(adapter)
+const adapter = new FileSync("db.json");
+const db = low(adapter);
 
-db._.mixin(lodashId)
+db._.mixin(lodashId);
 
 // We need to set some default values, if the collection does not exist yet
 // We also can store our collection
-const collection = db
-  .defaults({ posts: [] })
-  .get('posts')
+const collection = db.defaults({ posts: [] }).get("posts");
 
 // Insert a new post...
-const newPost = collection
-  .insert({ title: 'low!' })
-  .write()
+const newPost = collection.insert({ title: "low!" }).write();
 
 // ...and retrieve it using its id
-const post = collection
-  .getById(newPost.id)
-  .value()
+const post = collection.getById(newPost.id).value();
 ```
 
-### How to create custom adapters
+### 如何创建自定义适配器
 
 `low()` accepts custom Adapter, so you can virtually save your data to any storage using any format.
 
@@ -389,33 +339,33 @@ class MyStorage {
   }
 }
 
-const adapter = new MyStorage(args)
-const db = low(adapter)
+const adapter = new MyStorage(args);
+const db = low(adapter);
 ```
 
 See [src/adapters](src/adapters) for examples.
 
-### How to encrypt data
+### 如何对数据进行加密
 
 `FileSync`, `FileAsync` and `LocalStorage` accept custom `serialize` and `deserialize` functions. You can use them to add encryption logic.
 
 ```js
-const adapter = new FileSync('db.json', {
+const adapter = new FileSync("db.json", {
   serialize: (data) => encrypt(JSON.stringify(data)),
-  deserialize: (data) => JSON.parse(decrypt(data))
-})
+  deserialize: (data) => JSON.parse(decrypt(data)),
+});
 ```
 
-## Changelog
+## 更新日志
 
 See changes for each version in the [release notes](https://github.com/typicode/lowdb/releases).
 
-## Limits
+## 范围
 
 Lowdb is a convenient method for storing data without setting up a database server. It is fast enough and safe to be used as an embedded database.
 
 However, if you seek high performance and scalability more than simplicity, you should probably stick to traditional databases like MongoDB.
 
-## License
+## 执照
 
 MIT - [Typicode :cactus:](https://github.com/typicode)
