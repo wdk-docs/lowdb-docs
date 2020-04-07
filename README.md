@@ -221,61 +221,61 @@ db.read().then(() => console.log("Content of my_project/db.json is loaded"));
 
 #### 例子
 
-Check if posts exists.
+检查`posts`是否存在。
 
 ```js
 db.has("posts").value();
 ```
 
-Set posts.
+设置 `posts`.
 
 ```js
 db.set("posts", []).write();
 ```
 
-Sort the top five posts.
+排序前五名`posts`。
 
 ```js
 db.get("posts").filter({ published: true }).sortBy("views").take(5).value();
 ```
 
-Get post titles.
+查询 `post` 标题.
 
 ```js
 db.get("posts").map("title").value();
 ```
 
-Get the number of posts.
+获取`posts`的数量。
 
 ```js
 db.get("posts").size().value();
 ```
 
-Get the title of first post using a path.
+使用路径获得第一个`POST`标题.
 
 ```js
 db.get("posts[0].title").value();
 ```
 
-Update a post.
+更新`POST`。
 
 ```js
 db.get("posts").find({ title: "low!" }).assign({ title: "hi!" }).write();
 ```
 
-Remove posts.
+移除 `posts`.
 
 ```js
 db.get("posts").remove({ title: "low!" }).write();
 ```
 
-Remove a property.
+删除属性。
 
 ```js
 db.unset("user.name").write();
 ```
 
-Make a deep clone of posts.
+`posts`的深克隆。
 
 ```js
 db.get("posts").cloneDeep().value();
